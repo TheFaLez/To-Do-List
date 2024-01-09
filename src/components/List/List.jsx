@@ -57,6 +57,8 @@ const List = () => {
     } else {
       return;
     }
+
+    setAdd([])
   };
 
   const btn3 = (value) => {
@@ -88,20 +90,23 @@ const List = () => {
   };
 
   const btn6 = () => {
-    setUsers(
-      users.map((todo) => {
-        if (todo.id == userId) {
-          return {
-            ...todo,
-            title: save.length > 0 ? save : "Null",
-          };
-        } else {
-          return todo;
-        }
-      })
-    );
+    if (save.length > 0) {
+      setUsers(
+        users.map((todo) => {
+          if (todo.id == userId) {
+            return {
+              ...todo,
+              title: save,
+            };
+          } else {
+            return todo;
+          }
+        })
+      );
+    }
 
     setWin("card-window-off");
+    setSave([])  
   };
 
   const close = () => {
@@ -132,6 +137,7 @@ const List = () => {
               onChange={inpAdd}
               data-aos="fade-right"
               placeholder="Add New Task..."
+              value={add}
             />{" "}
             <button onClick={btn2} data-aos="fade-left">
               Add New Task
@@ -179,7 +185,7 @@ const List = () => {
           })
           .reverse()}
         <div className={win}>
-          <input type="text" onChange={inpSave} />{" "}
+          <input type="text" onChange={inpSave} value={save}/>{" "}
           <button className="save" onClick={btn6}>Save</button>
           <button className="close" onClick={close}>
             <i className="fa-solid fa-xmark"></i>
