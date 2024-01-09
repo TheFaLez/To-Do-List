@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Icon from "./todoicon.svg";
 
 const List = () => {
+  const storage = localStorage.getItem("todo");
+
   const [users, setUsers] = useState([]);
   const [back, setBack] = useState([]);
   const [add, setAdd] = useState([]);
@@ -15,7 +17,11 @@ const List = () => {
       .then((response) => response.json())
       .then((info) => {
         let newDate = info.filter((filt) => filt.id <= 50);
-        return setUsers(newDate), setBack(newDate);
+        if (storage) {
+          return setUsers(JSON.parse(storage)), setBack(JSON.parse(storage));
+        } else {
+          return setUsers(newDate), setBack(newDate);
+        }
       });
   }, []);
 
@@ -58,7 +64,7 @@ const List = () => {
       return;
     }
 
-    setAdd([])
+    setAdd([]);
   };
 
   const btn3 = (value) => {
@@ -106,12 +112,14 @@ const List = () => {
     }
 
     setWin("card-window-off");
-    setSave([])  
+    setSave([]);
   };
 
   const close = () => {
     setWin("card-window-off");
-  }
+  };
+
+  localStorage.setItem("todo", JSON.stringify(users));
 
   return (
     <div className="list" data-aos="fade-up">
@@ -185,8 +193,10 @@ const List = () => {
           })
           .reverse()}
         <div className={win}>
-          <input type="text" onChange={inpSave} value={save}/>{" "}
-          <button className="save" onClick={btn6}>Save</button>
+          <input type="text" onChange={inpSave} value={save} />{" "}
+          <button className="save" onClick={btn6}>
+            Save
+          </button>
           <button className="close" onClick={close}>
             <i className="fa-solid fa-xmark"></i>
           </button>
