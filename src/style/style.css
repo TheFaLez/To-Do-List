@@ -130,7 +130,7 @@
 
 .add button:hover {
   transition: all 0.2s;
-  transform: scale(1.5);
+  transform: scale(1.02);
 }
 
 .cards {
@@ -150,22 +150,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   padding: 25px;
-}
-
-.more{
-  width: 150px;
-  height: 50px;
-  font-size: 22px;
-  color: white;
-  cursor: pointer;
-  border-radius: 50px;
-  border: none;
-  background-image: linear-gradient(to right, #c850c0 46%, #ffcc70 100%);
-}
-
-.more-off{
-  display: none;
 }
 
 .card-btns {
@@ -234,14 +220,28 @@
   transform: scale(1.02);
 }
 
+.card-edit{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: rgb(54, 54, 248);
+  border-radius: 50px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .card-title-off {
-  width: 400px;
+  width: 480px;
   text-transform: capitalize;
   font-size: 23px;  
 }
 
 .card-title-on {
-  width: 400px;
+  width: 480px;
   text-transform: capitalize;
   font-size: 23px;
   color: grey;
@@ -249,3 +249,66 @@
   transition: all 0.1s;
 }
 
+.card-window-off{
+  display: none;
+}
+
+@keyframes anim {
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+.card-window-on{
+  width: 500px;
+  height: 100px;
+  background-color: white;
+  border-radius: 20px;
+  position: fixed;
+  top: 140px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  animation: anim 0.3s;
+  padding: 0 20px;
+}
+
+.card-window-on input{
+  width: 80%;
+  height: 40px;
+  border: 3px solid orange;
+  outline: none;
+  font-size: 16px;
+  padding: 3px 10px;
+}
+
+.save{
+  width: 20%;
+  height: 40px;
+  border: 3px solid orange;
+  background: none;
+  font-size: 18px;
+}
+
+.close{
+  position: absolute;
+  top: -35px;
+  right: -35px;
+
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid orange;
+  background: white;
+  border-radius: 50px;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+}
