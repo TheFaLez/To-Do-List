@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Icon from "../../../public/todo icon.svg";
+import Icon from "./todoicon.svg";
 
 const List = () => {
   const [users, setUsers] = useState([]);
   const [back, setBack] = useState([]);
-  const [prev, setPrev] = useState(10);
   const [add, setAdd] = useState([]);
   const [del, setDel] = useState("card-delete");
-  const [more, setMore] = useState("more");
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/todos")
@@ -17,10 +15,6 @@ const List = () => {
         return setUsers(newDate), setBack(newDate);
       });
   }, []);
-
-  const btn4 = () => {
-    setPrev((prev) => prev + 10);
-  };
 
   const btn1 = (id) => {
     let newDate = users.filter((filtr) => filtr.id != id);
@@ -34,16 +28,12 @@ const List = () => {
       value.title.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
-    if (e.target.value.length != 0) {
+    if (e.target.value.length > 0) {
       setUsers(newDate);
       setDel("card-delete-off");
-      setPrev(users.length);
-      setMore("more-off");
     } else {
       setDel("card-delete");
       setUsers(back);
-      setPrev(10);
-      setMore("more");
     }
   };
 
@@ -116,7 +106,6 @@ const List = () => {
       <div className="cards">
         {users
           .map((value, index) => {
-            if (index < prev) {
               return (
                 <div className="card" key={value.id} data-aos="fade-right">
                   <div className="card-text">
@@ -147,15 +136,9 @@ const List = () => {
                   </div>
                 </div>
               );
-              {
-                index = index + 1;
-              }
-            }
+             
           })
           .reverse()}
-        <button className={more} onClick={btn4}>
-          More
-        </button>
       </div>
     </div>
   );
