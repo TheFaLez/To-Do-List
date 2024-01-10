@@ -103,7 +103,6 @@
 
   .card {
     flex-direction: column;
-    height: 150px;
     gap: 10px;
   }
 
@@ -147,7 +146,6 @@
 
   .card {
     flex-direction: column;
-    height: 150px;
     gap: 10px;
   }
 
@@ -209,7 +207,6 @@
 
   .card {
     flex-direction: column;
-    height: 150px;
     gap: 10px;
   }
 

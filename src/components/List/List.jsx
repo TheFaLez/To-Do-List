@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Icon from "./todoicon.svg";
 
 const List = () => {
-  const storage = localStorage.getItem("todo");
-
   const [users, setUsers] = useState([]);
   const [back, setBack] = useState([]);
   const [add, setAdd] = useState([]);
@@ -17,11 +15,7 @@ const List = () => {
       .then((response) => response.json())
       .then((info) => {
         let newDate = info.filter((filt) => filt.id <= 50);
-        if (storage) {
-          return setUsers(JSON.parse(storage)), setBack(JSON.parse(storage));
-        } else {
-          return setUsers(newDate), setBack(newDate);
-        }
+        return setUsers(newDate), setBack(newDate);
       });
   }, []);
 
@@ -82,16 +76,17 @@ const List = () => {
     );
   };
 
-  const btn5 = (id) => {
+  const btn5 = (id, title) => {
     setUserId(id);
     setWin("card-window-on");
+    setSave(title);
   };
 
   const inpSave = (e) => {
     if (e.target.value.length > 0) {
       setSave(e.target.value);
     } else {
-      setSave([])
+      setSave([]);
     }
   };
 
@@ -181,7 +176,10 @@ const List = () => {
                       <i className="fa-solid fa-check"></i>
                     )}
                   </button>
-                  <button className="card-edit" onClick={() => btn5(value.id)}>
+                  <button
+                    className="card-edit"
+                    onClick={() => btn5(value.id, value.title)}
+                  >
                     <i className="fa-solid fa-pen-to-square"></i>
                   </button>
                   <button className={del} onClick={() => btn1(value.id)}>
