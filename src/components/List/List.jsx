@@ -12,11 +12,20 @@ const List = () => {
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("API Error");
+        }
+      })
       .then((info) => {
-        let newDate = info.filter((filt) => filt.id <= 50);
-        return setUsers(newDate), setBack(newDate);
-      });
+        return (
+          setUsers(info.filter((filt) => filt.id <= 50)),
+          setBack(info.filter((filt) => filt.id <= 50))
+        );
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const btn1 = (id) => {
