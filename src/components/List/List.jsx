@@ -52,8 +52,8 @@ const List = () => {
     };
 
     if (add.length != 0) {
-      setUsers([...users, newDate]);
-      setBack([...back, newDate]);
+      setUsers([newDate, ...users]);
+      setBack([newDate, ...back]);
     } else {
       return;
     }
@@ -150,46 +150,44 @@ const List = () => {
       </div>
 
       <div className="cards">
-        {users
-          .map((value, index) => {
-            return (
-              <div className="card" key={value.id} data-aos="fade-right">
-                <div className="card-text">
-                  <h2
-                    className={
-                      value.completed ? "card-title-on" : "card-title-off"
-                    }
-                  >
-                    {value.title}
-                  </h2>
-                </div>
-                <div className="card-btns">
-                  <button
-                    className={
-                      value.completed ? "card-check-off" : "card-check-on"
-                    }
-                    onClick={() => btn3(value.id)}
-                  >
-                    {value.completed ? (
-                      <i className="fa-solid fa-xmark"></i>
-                    ) : (
-                      <i className="fa-solid fa-check"></i>
-                    )}
-                  </button>
-                  <button
-                    className="card-edit"
-                    onClick={() => btn5(value.id, value.title)}
-                  >
-                    <i className="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button className={del} onClick={() => btn1(value.id)}>
-                    <i className="fa-solid fa-trash-can"></i>
-                  </button>
-                </div>
+        {users.map((value, index) => {
+          return (
+            <div className="card" key={value.id} data-aos="fade-right">
+              <div className="card-text">
+                <h2
+                  className={
+                    value.completed ? "card-title-on" : "card-title-off"
+                  }
+                >
+                  {value.title}
+                </h2>
               </div>
-            );
-          })
-          .reverse()}
+              <div className="card-btns">
+                <button
+                  className={
+                    value.completed ? "card-check-off" : "card-check-on"
+                  }
+                  onClick={() => btn3(value.id)}
+                >
+                  {value.completed ? (
+                    <i className="fa-solid fa-xmark"></i>
+                  ) : (
+                    <i className="fa-solid fa-check"></i>
+                  )}
+                </button>
+                <button
+                  className="card-edit"
+                  onClick={() => btn5(value.id, value.title)}
+                >
+                  <i className="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button className={del} onClick={() => btn1(value.id)}>
+                  <i className="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+          );
+        })}
         <div className={win}>
           <input type="text" onChange={inpSave} value={save} />{" "}
           <button className="save" onClick={btn6}>
