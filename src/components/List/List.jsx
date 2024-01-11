@@ -36,7 +36,7 @@ const List = () => {
   };
 
   const inpSearch = (e) => {
-    let newDate = users.filter((value) =>
+    let newDate = back.filter((value) =>
       value.title.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
