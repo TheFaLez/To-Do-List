@@ -20,14 +20,13 @@ const List = () => {
         }
       })
       .then((info) => {
-        return (
-          setUsers(info.filter((filt) => filt.id <= 50)),
-          setBack(info.filter((filt) => filt.id <= 50))
-        );
+       let newDate = info.filter((filt) => filt.id <= 50);
+
+       setUsers(newDate);
+        setBack(newDate);
       })
       .catch((err) => console.log(err));
   }, []);
-
   const btn1 = (id) => {
     let newDate = users.filter((filtr) => filtr.id != id);
 
